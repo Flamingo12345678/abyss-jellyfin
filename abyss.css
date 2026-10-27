@@ -2421,11 +2421,59 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     content: "Resume";
 }
 
-.layout-tv .detailImageContainer .card,
-.layout-desktop .detailImageContainer .card {
-    position: fixed !important;
-    top: 15% !important;
+/* YeeTV: responsive spacing for lower detail sections */
+.layout-desktop .itemDetailPage .detailPageSecondaryContainer.padded-left {
+    padding-left: clamp(16px, 2.5vw, 24px) !important;
+    padding-right: clamp(16px, 2.5vw, 24px) !important;
+    box-sizing: border-box !important;
 }
+
+/* YeeTV: prevent fixed posters from overlapping detail content.
+   Applies to desktop, TV and mobile layouts. */
+.itemDetailPage .detailImageContainer .card {
+    position: relative !important;
+    top: auto !important;
+    float: none !important;
+}
+
+/* YeeTV: TV detail page grid layout */
+.layout-tv .itemDetailPage .detailPagePrimaryContainer {
+    display: grid !important;
+    grid-template-columns: 32.45% minmax(0, 1fr);
+    grid-template-areas:
+        "poster ribbon"
+        "poster content";
+    grid-template-rows: auto auto;
+    align-items: start;
+}
+
+.layout-tv .itemDetailPage .detailPagePrimaryContainer
+> .detailImageContainer.hide-mobile {
+    grid-area: poster;
+    min-width: 0;
+}
+
+.layout-tv .itemDetailPage .detailPagePrimaryContainer
+> .detailRibbon {
+    grid-area: ribbon;
+    padding-left: 24px !important;
+    min-width: 0;
+}
+
+.layout-tv .itemDetailPage .detailPagePrimaryContainer
+> .detailPagePrimaryContent {
+    grid-area: content;
+    padding-left: 24px !important;
+    min-width: 0;
+}
+
+/* YeeTV: full-width secondary sections on TV */
+.layout-tv .itemDetailPage .detailPageSecondaryContainer.padded-left {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+}
+
 
 .layout-tv .detailPageSecondaryContainer.padded-left,
 .layout-desktop .detailPageSecondaryContainer.padded-left {
@@ -2481,10 +2529,10 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     }
 }
 
-/* Tablets (mobile layout): clear the absolutely positioned detail image (left 5% + max-width 30vw) */
+/* Tablets (mobile layout): align the detail ribbon with the primary content */
 @media screen and (min-width: 768px) {
     .layout-mobile .detailRibbon {
-        padding-left: calc(35vw + 1.5rem) !important;
+        padding-left: 5% !important;
     }
 
     .layout-mobile #itemDetailPage .itemName.originalTitle {
