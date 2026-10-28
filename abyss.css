@@ -2436,6 +2436,65 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     float: none !important;
 }
 
+/* YeeTV: desktop detail page layout and logo overlay (Jellyfin 12.4)
+   Keep the logo over the cinematic backdrop rather than in document flow.
+   Align poster, actions and synopsis without changing TV/mobile layouts. */
+.layout-desktop .itemDetailPage {
+    position: relative !important;
+}
+
+.layout-desktop .itemDetailPage .itemBackdrop {
+    height: min(20vh, 220px) !important;
+}
+
+.layout-desktop .itemDetailPage .detailLogo {
+    position: absolute !important;
+    top: 2vh !important;
+    left: 32.5% !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop .itemDetailPage .detailPagePrimaryContainer {
+    display: grid !important;
+    grid-template-columns: 32.45% minmax(0, 1fr) !important;
+    grid-template-areas:
+        "poster ribbon"
+        "poster content" !important;
+    grid-template-rows: auto auto !important;
+    align-items: start !important;
+}
+
+.layout-desktop .itemDetailPage .detailPagePrimaryContainer
+> .detailImageContainer {
+    grid-area: poster;
+    min-width: 0;
+}
+
+.layout-desktop .itemDetailPage .detailPagePrimaryContainer
+> .detailRibbon {
+    grid-area: ribbon;
+    min-width: 0;
+    margin-top: 0 !important;
+    padding-left: 20px !important;
+}
+
+.layout-desktop .itemDetailPage .detailPagePrimaryContainer
+> .detailPagePrimaryContent {
+    grid-area: content;
+    min-width: 0;
+    padding-left: 20px !important;
+}
+
+/* YeeTV: contain Jellyseerr recommendations within their horizontal scroller.
+   Avoid document-wide horizontal overflow while preserving card navigation. */
+.layout-desktop .itemDetailPage
+.jellyseerr-details-section .emby-scroller {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    overscroll-behavior-x: contain;
+}
+
 /* YeeTV: TV detail page grid layout */
 .layout-tv .itemDetailPage .detailPagePrimaryContainer {
     display: grid !important;
