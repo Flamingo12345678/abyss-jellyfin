@@ -2486,6 +2486,15 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     padding-left: 20px !important;
 }
 
+/* YeeTV: contain Jellyseerr recommendations within their horizontal scroller.
+   Avoid document-wide horizontal overflow while preserving card navigation. */
+.layout-desktop .itemDetailPage
+.jellyseerr-details-section .emby-scroller {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    overscroll-behavior-x: contain;
+}
+
 /* YeeTV: TV detail page grid layout */
 .layout-tv .itemDetailPage .detailPagePrimaryContainer {
     display: grid !important;
